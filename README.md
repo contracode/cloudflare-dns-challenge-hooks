@@ -26,7 +26,7 @@ These scripts are used with [certbot](https://certbot.eff.org/pages/about) via c
 # │ │ │ │ │ │
 # * * * * * /bin/bash {Location of the script}
 ```
-For example, by first running `sudo crontab -e`, and adding the following:
+For example, by first running `sudo crontab -e`, and adding
 
 ```bash
 0 0 * * * /usr/bin/certbot renew --preferred-challenges=dns --manual-auth-hook "/home/pi/cloudflare-dns-challenge-hooks/cloudflare-auth.sh" --post-hook "systemctl reload nginx" --manual-cleanup-hook "/home/pi/cloudflare-dns-challenge-hooks/cloudflare-cleanup.sh"
