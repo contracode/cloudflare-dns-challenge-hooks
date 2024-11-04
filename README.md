@@ -49,6 +49,14 @@ sudo CERTBOT_DOMAIN=contracode.com ./cloudflare-cleanup.sh
 
 will remove it.
 
+To perform component testing, use
+
+```bash
+sudo /usr/bin/certbot renew --force-renewal --preferred-challenges=dns --manual-auth-hook "/home/pi/cloudflare-dns-challenge-hooks/cloudflare-auth.sh" --post-hook "systemctl reload nginx" --manual-cleanup-hook "/home/pi/cloudflare-dns-challenge-hooks/cloudflare-cleanup.sh"
+```
+
+which forces a renewal attempt against the same mechanism specified in the `cron` table.
+
 ## Tested Environments:
 Ubuntu 20.04 LTS
 
@@ -56,4 +64,4 @@ Ubuntu 20.04 LTS
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
 ## License
-[GNU General Public License, version 3](https://github.com/contracode/cloudflare-ddns-updater/blob/main/LICENSE)
+[GNU General Public License, version 3](https://github.com/contracode/cloudflare-dns-challenge-hooks/blob/main/LICENSE)
