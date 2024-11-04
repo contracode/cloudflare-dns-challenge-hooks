@@ -44,7 +44,7 @@ sudo CERTBOT_DOMAIN=foo.com CERTBOT_VALIDATION=bar ./cloudflare-auth.sh
 will create a `TXT` DNS record for `foo.com` with the name _acme-challenge_ and content, _bar_., and
 
 ```bash
-sudo CERTBOT_DOMAIN=contracode.com ./cloudflare-cleanup.sh
+sudo CERTBOT_DOMAIN=foo.com ./cloudflare-cleanup.sh
 ```
 
 will remove it.
@@ -57,11 +57,27 @@ sudo /usr/bin/certbot renew --force-renewal --preferred-challenges=dns --manual-
 
 which forces a renewal attempt against the same mechanism specified in the `cron` table.
 
+If this succeeds, the domain will have an HTTPS certificate that expires 90 days from the current time, specified in the UTC time zone.
+
+The Certificate SHA-256 fingerprint will match the output from
+
+```bash
+sudo cat /etc/letsencrypt/live/foo.com/fullchain.pem | openssl x509 -noout -fingerprint -sha256
+```
+
+executed on the server, and the Public Key SHA-256 fingerprint will match the output from
+
+```bash
+sudo cat /etc/letsencrypt/live/contracode.com/fullchain.pem | openssl x509 -noout -pubkey | sed '/^-----BEGIN PUBLIC KEY-----/d;/^-----END PUBLIC KEY-----/d' | tr -d '\n' | base64 --decode |  openssl dgst -sha256 -hex
+```
+
+executed on the server.
+
 ## Tested Environments:
 Ubuntu 20.04 LTS
 
 ## Contributing
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+Pull requests are welcome. For major changes, please [open an issue](https://github.com/contracode/cloudflare-dns-challenge-hooks/issues/new) first to discuss the proposed change.
 
 ## License
 [GNU General Public License, version 3](https://github.com/contracode/cloudflare-dns-challenge-hooks/blob/main/LICENSE)
