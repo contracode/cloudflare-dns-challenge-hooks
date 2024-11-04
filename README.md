@@ -41,7 +41,9 @@ Assuming that authentication details have been specified at `~/.config/cloudflar
 sudo CERTBOT_DOMAIN=foo.com CERTBOT_VALIDATION=bar ./cloudflare-auth.sh
 ```
 
-will create a `TXT` DNS record for `foo.com` with the name _acme-challenge_ and content, _bar_., and
+will create a `TXT` DNS record for `foo.com` with the name, _acme-challenge_, and content, _bar_.
+
+Conversely,
 
 ```bash
 sudo CERTBOT_DOMAIN=foo.com ./cloudflare-cleanup.sh
