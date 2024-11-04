@@ -68,7 +68,7 @@ sudo cat /etc/letsencrypt/live/foo.com/fullchain.pem | openssl x509 -noout -fing
 executed on the server, and the Public Key SHA-256 fingerprint will match the output from
 
 ```bash
-sudo cat /etc/letsencrypt/live/contracode.com/fullchain.pem | openssl x509 -noout -pubkey | sed '/^-----BEGIN PUBLIC KEY-----/d;/^-----END PUBLIC KEY-----/d' | tr -d '\n' | base64 --decode |  openssl dgst -sha256 -hex
+sudo cat /etc/letsencrypt/live/contracode.com/fullchain.pem | openssl x509 -noout -pubkey | sed '/^-----BEGIN PUBLIC KEY-----/d;/^-----END PUBLIC KEY-----/d' | tr -d '\n' | base64 --decode | openssl dgst -sha256 -hex
 ```
 
 executed on the server.
